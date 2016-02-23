@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.Container;
 import java.awt.event.*;
 import javax.swing.*;
+import java.lang.NumberFormatException;
 
 @SuppressWarnings("serial")
 class MainFrame extends JFrame {
@@ -132,8 +133,14 @@ class MainFrame extends JFrame {
 			String type = typeOptions.getSelectedItem().toString();
 			String name = nameField.getText();
 			String balance = balanceField.getText();
-
-			if (myServer.newAccount(type, name, Float.parseFloat(balance))) {
+			float fbalance;
+			//Throws exception when float can't be parsed
+			try {
+				fbalance = Float.parseFloat(balance);
+			} catch (NumberFormatException nfe) {
+				nfe.printStackTrace();
+			}
+			if (myServer.newAccount(type, name, fbalance)) {
 				JOptionPane.showMessageDialog(null, "Account created successfully");
 			} else {
 				JOptionPane.showMessageDialog(null, "Account not created!");
