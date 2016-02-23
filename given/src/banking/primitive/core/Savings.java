@@ -21,6 +21,7 @@ public class Savings extends Account {
 			if (balance >= 0.0f) {
 				setState(State.OPEN);
 			}
+			return true; // added return true so the deposit function doesnt always return false
 		}
 		return false;
 	}
@@ -44,7 +45,9 @@ public class Savings extends Account {
 		return false;
 	}
 	
-	public String getType() { return "Checking"; }
+	public String getType() { 
+		return "Checking"; //Formatted correctly
+	}
 
 	public String toString() {
 		return "Savings: " + getName() + ": " + getBalance();
